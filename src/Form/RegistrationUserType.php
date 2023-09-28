@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -82,6 +85,39 @@ class RegistrationUserType extends AbstractType
                     new Assert\NotBlank(),
                     new Assert\Length(['min' => 2, 'max' => 50])
                 ]
+            ])
+            ->add('description', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                
+                ],
+                'label' => 'Description',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank()
+                ]
+            ])
+            ->add('isEntreprise', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input',
+                ],
+                'required' => false,
+                'label' => 'Entripse ? ',
+                'label_attr' => [
+                    'class' => 'form-check-label'
+                ],
+                'constraints' => [
+                    new Assert\NotNull()
+                ]
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de l\'utilisateur ',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'required' => false
             ])
             // ->add('isEntreprise', TextType::class)
             ->add('plainPassword', RepeatedType::class, [

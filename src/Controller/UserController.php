@@ -40,7 +40,7 @@ class UserController extends AbstractController
                 'success',
                 'Modification ok'
             );
-            return $this->redirectToRoute('user.register');
+            return $this->redirectToRoute('app_home');
         }
         else{
 
