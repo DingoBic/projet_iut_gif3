@@ -13,8 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Component\Validator\Constraints as Assert;
-
-class RegistrationUserType extends AbstractType
+class UserEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -35,9 +34,6 @@ class RegistrationUserType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 180])
                 ]
             ])
-            // ->add('roles')
-            // ->add('password')
-           
             ->add('username', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -83,36 +79,12 @@ class RegistrationUserType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50])
                 ]
             ])
-            // ->add('isEntreprise', TextType::class)
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options' => [
-                    'attr' => [
-                        'class' => 'form-control'
-                    ],
-                    'label' => 'Mot de passe',
-                    'label_attr' => [
-                        'class' => 'form-label  mt-4'
-                    ]
-                ],
-                'second_options' => [
-                    'attr' => [
-                        'class' => 'form-control'
-                    ],
-                    'label' => 'Confirmation du mot de passe',
-                    'label_attr' => [
-                        'class' => 'form-label  mt-4'
-                    ]
-                ],
-                'invalid_message' => 'Les mots de passe ne correspondent pas.'
-            ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                     ]
             ]);
-                
-                // ->add('createdAt');
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

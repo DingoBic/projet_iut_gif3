@@ -16,11 +16,13 @@ class SecurityController extends AbstractController
     #[Route('/login', name: 'login.user', methods:['GET', 'POST'])]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
+        
         return $this->render('pages/security/index.html.twig', [
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError()
         ]);
     }
+
     #[Route('/deconnexion', 'user.logout')]
     public function logout()
     {
@@ -32,12 +34,14 @@ class SecurityController extends AbstractController
     {
         $user = new User();
         $user->setRoles(['ROLE_USER']);
+        $user->setCompteursigna(10);
 
         $form = $this->createForm(RegistrationUserType::class, $user);
-
+        
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $user = $form->getData();
 
             $this->addFlash(
