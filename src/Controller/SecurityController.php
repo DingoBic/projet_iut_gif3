@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
     public function registration(Request $request, EntityManagerInterface $manager): Response
     {
         $user = new User();
-        $user->setRoles(['ROLE_USER']);
+        // $user->setRoles(['ROLE_USER']);
         $user->setCompteursigna(10);
 
         $form = $this->createForm(RegistrationUserType::class, $user);
@@ -41,7 +41,16 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            $isen = $form->get("isEntreprise")->getData();
+            if($isen == true){
+                $user->setRoles(['ROLE_ENTREPRISE']);
+                // dd("entreprise");
+            }else{
+                $user->setRoles(['ROLE_USER']);
+                // dd("utilisateur");
+            }
             
+            // dd($user);
             $user = $form->getData();
 
             $this->addFlash(

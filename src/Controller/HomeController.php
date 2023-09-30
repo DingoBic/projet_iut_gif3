@@ -31,7 +31,11 @@ class HomeController extends AbstractController
                 return $this->redirectToRoute("app_home");
                 
             } else if(in_array('ROLE_USER', $roles)) {
-                // dd("user  ");
+                // dd("user ");
+                return $this->redirectToRoute("app_home");
+            }
+            else if(in_array('ROLE_ENTREPRISE', $roles)) {
+                // dd("entreprise");
                 return $this->redirectToRoute("app_home");
             }
             else{
@@ -39,13 +43,17 @@ class HomeController extends AbstractController
                 return $this->redirectToRoute("app_home");
             }
         }
+        else{
+            return $this->redirectToRoute("app_home");
+        }
         
     }
     
     #[Route('/home', name: 'app_home', methods:'GET')]
     public function home(UserRepository $userRepository){
         
-        $users = $userRepository->findBy([],[], 5);
+        // $users = $userRepository->findBy([],[], 5);
+        $users = $userRepository->findAll();
 
         
     
@@ -62,9 +70,9 @@ class HomeController extends AbstractController
 
         
     
-        
-        return $this->render('', [
-            'users' => $users,
-        ]);
+        dd($users);
+        // return $this->render('', [
+        //     'users' => $users,
+        // ]);
     }
 }

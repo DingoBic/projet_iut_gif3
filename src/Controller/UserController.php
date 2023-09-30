@@ -5,8 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserEditPasswordEdit;
 use App\Form\UserEditType;
-use DateTimeImmutable;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
+    
     #[Route('/user/{id}/edit', name: 'user.edit', methods:['GET','POST'])]
     public function edit(User $user,Request $request, EntityManagerInterface $manager): Response
     {
